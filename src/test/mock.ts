@@ -10,7 +10,7 @@ function newAuctionProducts() {
         id: `${n}`,
         title: getRandomString(30),
         listPrice: getRandomInteger(100, 500),
-        selleringPrice: getRandomInteger(100, 500),
+        sellingPrice: getRandomInteger(100, 500),
     } as App.AuctionProduct));
 }
 

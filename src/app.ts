@@ -4,7 +4,7 @@ export declare namespace App {
         id: string;
         title: string;
         listPrice: number;
-        selleringPrice: number;
+        sellingPrice: number;
     }
 
     interface AuctionProductSource {
@@ -12,11 +12,16 @@ export declare namespace App {
     }
 
     // System
+    interface Pricing {
+        listPrice: number;
+        discount: number;
+    }
+
     interface Product {
         site: string;
         id: string;
-        title: string;
-        discount: number;
+        name: string;
+        pricing: Pricing
     }
 
     interface ProductImporter {
