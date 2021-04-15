@@ -27,4 +27,12 @@ export declare namespace App {
     interface ProductImporter {
         fetchProducts: () => Product[]
     }
+
+    interface ProductInventory {
+        upsertProduct: (product: Product) => void;
+    }
+
+    interface ProductValidator {
+        isValid: (product: Product) => void;
+    }
 }
