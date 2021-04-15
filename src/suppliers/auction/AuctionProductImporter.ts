@@ -1,11 +1,11 @@
 import { App } from '../../app';
+import { Product } from '../../model/Product';
 
 export class AuctionProductImporter implements App.ProductImporter {
     constructor(private dataSource: App.AuctionProductSource) { }
 
     fetchProducts() {
-        const products: App.Product[] = [];
-        this.dataSource.fetchProducts().forEach(p => products.push({} as App.Product));
-        return products;
+        return this.dataSource.fetchProducts()
+            .map(p => new Product('AUCTION', null as any, null as any, null as any));
     }
 }
