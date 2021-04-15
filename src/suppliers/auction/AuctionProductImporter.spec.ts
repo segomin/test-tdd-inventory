@@ -11,4 +11,15 @@ describe('Auction Product Importer', () => {
 
         expect(actual.length).toBe(auction.sources.length);
     })
+
+    it('should set supplier name', () => {
+        const stub = new AuctionProductSourceStub(auction.sources)
+        const sut = new AuctionProductImporter(stub)
+
+        const actual = sut.fetchProducts();
+
+        actual.forEach(p => {
+            expect(p.site).toBe('AUCTION');
+        })
+    })
 })
