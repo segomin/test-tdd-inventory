@@ -6,5 +6,7 @@ export class ProductSynchronizer {
                 private inventory: App.ProductInventory) { }
 
     run(): void {
+        const products = this.importer.fetchProducts();
+        products.forEach(this.inventory.upsertProduct);
     }
 }

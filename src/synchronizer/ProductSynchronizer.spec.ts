@@ -3,6 +3,7 @@ import { AuctionProductImporter } from "../suppliers/auction/AuctionProductImpor
 import { auction } from "../test/mock";
 import { ListPriceFilter } from "./ListPriceFilter";
 import { ProductSynchronizer } from "./ProductSynchronizer";
+import { ProductInventorySpy } from "../test/spy/ProductInventorySpy";
 
 describe('Product Synchronizer', () => {
     it('should saves Products', () => {
