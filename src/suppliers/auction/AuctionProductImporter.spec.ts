@@ -1,5 +1,6 @@
 import { AuctionProductImporter } from "./AuctionProductImporter"
 import { auction } from "../../test/mock"
+import { AuctionProductSourceStub } from "../../test/stub/auction"
 
 describe('Auction Product Importer', () => {
     it('should have all Products', () => {

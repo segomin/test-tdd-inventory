@@ -11,6 +11,6 @@ function newAuctionProducts() {
         title: getRandomString(30),
         listPrice: getRandomInteger(100, 500),
         selleringPrice: getRandomInteger(100, 500),
-    } as App.AuctionProductSource));
+    } as App.AuctionProduct));
 }
 
