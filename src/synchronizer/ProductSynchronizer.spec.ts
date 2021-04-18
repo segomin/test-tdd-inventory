@@ -4,6 +4,9 @@ import { auction } from "../test/mock";
 import { ListPriceFilter } from "./ListPriceFilter";
 import { ProductSynchronizer } from "./ProductSynchronizer";
 import { ProductInventorySpy } from "../test/spy/ProductInventorySpy";
+import { Pricing } from "../model/Pricing";
+import { Product } from "../model/Product";
+import { App } from "../app";
 
 describe('Product Synchronizer', () => {
     it('should saves Products', () => {
@@ -37,4 +40,31 @@ describe('Product Synchronizer', () => {
         expect(spy.getLog()).toEqual([]);
     })
 
+    
+    it('should not save invalid product by mock', () => {
+        // Arrange
+        const pricing = new Pricing(10, 1);
+        const product = new Product('auction', 'code', 'name', pricing);
+
+        const importer = new class {
+            fetchProducts = jest.fn().mockImplementation(() => [product]);
+        } as App.ProductImporter;
+        
+
+        const validator = new class {
+            isValid = jest.fn().mockImplementation(() => false);
+        } as App.ProductValidator;
+
+        const inventory = new class {
+            upsertProduct = jest.fn()
+        } as App.ProductInventory
+
+        const sut = new ProductSynchronizer(importer, validator, inventory);
+
+        // Act
+        sut.run();
+
+        // Assert
+        expect(inventory.upsertProduct).not.toBeCalled();
+    })
 })
