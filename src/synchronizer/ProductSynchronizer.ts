@@ -7,6 +7,6 @@ export class ProductSynchronizer {
 
     run(): void {
         const products = this.importer.fetchProducts();
-        products.forEach(this.inventory.upsertProduct);
+        products.filter(this.validator.isValid).forEach(this.inventory.upsertProduct);
     }
 }
