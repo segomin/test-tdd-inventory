@@ -6,11 +6,15 @@ export const auction = {
 };
 
 function newAuctionProducts() {
-    return range(5).map(n => ({
-        id: `${n}`,
-        title: getRandomString(30),
-        listPrice: getRandomInteger(100, 500),
-        sellingPrice: getRandomInteger(100, 500),
-    } as App.AuctionProduct));
+    return range(5).map(n => {
+        const listPrice = getRandomInteger(100, 500);
+        const sellingPrice = listPrice - getRandomInteger(1, 100);
+        return ({
+            id: `${n}`,
+            title: getRandomString(30),
+            listPrice,
+            sellingPrice,
+        } as App.AuctionProduct);
+    });
 }
 

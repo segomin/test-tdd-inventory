@@ -9,8 +9,13 @@ import { Product } from "../model/Product";
 import { App } from "../app";
 
 describe('Product Synchronizer', () => {
+    let sources: App.AuctionProduct[];
+    beforeEach(() => {
+        sources = [...auction.sources]
+    })
+
     it('should saves Products', () => {
-        const stub = new AuctionProductSourceStub(auction.sources)
+        const stub = new AuctionProductSourceStub(sources)
         const importer = new AuctionProductImporter(stub)
         const validator = new ListPriceFilter(0)
         const spy = new ProductInventorySpy();
@@ -19,12 +24,13 @@ describe('Product Synchronizer', () => {
         sut.run();
 
         const expected = importer.fetchProducts();
+        console.log('spy', spy.getLog(), 'expected', expected);
         expect(spy.getLog()).toEqual(expected);
     })
 
     it('should not save invalid product', () => {
         // Arrange
-        const products = auction.sources;
+        const products = sources;
         const lowerBound = Math.max(...products.map(p => p.listPrice + 100));
         const validator = new ListPriceFilter(lowerBound);
 
